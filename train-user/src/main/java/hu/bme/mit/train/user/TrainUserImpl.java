@@ -11,7 +11,7 @@ public class TrainUserImpl implements TrainUser {
 	private int joystickPosition;
 	private String name;
 	//shows whether thread for reference speed change has been started yet
-	private boolean threadStarted=false;
+	private boolean followSpeedStarted=false;
 
 	public TrainUserImpl(TrainController controller) {
 		this.controller = controller;
@@ -35,7 +35,7 @@ public class TrainUserImpl implements TrainUser {
 		controller.setJoystickPosition(joystickPosition);
 
 		//starts a thread for changing the ref. speed if it hasn't been started yet
-		if(!threadStarted){
+		if(!followSpeedStarted){
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -43,7 +43,7 @@ public class TrainUserImpl implements TrainUser {
 						controller.followSpeed();
 						try
 						{
-							Thread.sleep(5000);
+							Thread.sleep(3000);
 						}
 						catch (InterruptedException e)
 						{
@@ -52,7 +52,7 @@ public class TrainUserImpl implements TrainUser {
 					}
 				}
 			}).start();
-			threadStarted=true;
+			followSpeedStarted=true;
 		}
 	}
 
