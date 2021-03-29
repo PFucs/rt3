@@ -10,11 +10,13 @@ public class TrainUserImpl implements TrainUser {
 	private TrainController controller;
 	private int joystickPosition;
 	private String name;
+	private boolean alarmState;
 	//shows whether thread for reference speed change has been started yet
 	private boolean followSpeedStarted=false;
 
 	public TrainUserImpl(TrainController controller) {
 		this.controller = controller;
+		alarmState=false;
 		name = "Name";
 		System.out.printf("Created UserImpl: %s at %s\n", name, java.time.LocalDate.now());
 	}
@@ -22,6 +24,16 @@ public class TrainUserImpl implements TrainUser {
 	@Override
 	public boolean getAlarmFlag() {
 		return false;
+	}
+
+	@Override
+	public boolean getAlarmState() {
+		return alarmState;
+	}
+
+	@Override
+	public void setAlarmState(boolean a) {
+		alarmState=a;
 	}
 
 	@Override
