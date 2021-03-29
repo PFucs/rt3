@@ -48,4 +48,18 @@ public class TrainSensorTest {
         verify(tc).setSpeedLimit(500);
         verify(tu, never()).setAlarmState(true);
     }
+
+    @Test
+    public void SlowSpeedTest(){
+        ts.overrideSpeedLimit(1);
+        verify(tc, never()).setSpeedLimit(1);
+        verify(tu).setAlarmState(true);
+    }
+
+    @Test
+    public void FastSpeedTest(){
+        ts.overrideSpeedLimit(600);
+        verify(tc, never()).setSpeedLimit(600);
+        verify(tu).setAlarmState(true);
+    }
 }
