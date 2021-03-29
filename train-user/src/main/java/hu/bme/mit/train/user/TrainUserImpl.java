@@ -39,6 +39,7 @@ public class TrainUserImpl implements TrainUser {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
+					int j=0;
 					while(true) {
 						controller.followSpeed();
 						try
@@ -49,6 +50,10 @@ public class TrainUserImpl implements TrainUser {
 						{
 							e.printStackTrace();
 							Thread.currentThread().interrupt();
+						}
+						j++;
+						if (j  == Integer.MIN_VALUE) {  // true at Integer.MAX_VALUE +1
+							break;
 						}
 					}
 				}
